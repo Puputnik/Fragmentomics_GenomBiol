@@ -108,3 +108,21 @@ You have to provide a list of the chromosome names you are including in the anal
 Rscript ~/Fragmentomics/count_motif.R ~/Fragmentomics/chr_list.txt  STATS STATS/MOTIF STATS/MOTIF/MOTIF_COUNTS/  sample  
 ```
 This will produce .motif.R files, which are R objects (tables) with the raw count of each 4-mer motif.
+
+Use motif_heatmap_HAC.R file to make the heatmap from Figure 2
+You have to provide a samples_info_heatmap.tsv file (the one used for Katsman et al. is included in the ~/Fragmentomics/ folder) with the following columns:
+
+1) MOTIF_COUNTS folder full path
+2) sample basename (file name without the extension)
+3) sample printed name
+4) Disease annotation: Cancer, Healthy (Can be specified if HU or ISPRO samples)
+5) Sample sex (not mandatory)
+6) Library type (Illumina, Nanopore, Nanopore_HU)
+7) Sample type (Healthy, Lung)
+8) Tumor Fraction 
+
+```
+~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC01.HAC	BC01	Cancer	M	Nanopore	Lung	0.252
+~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC04.HAC	BC04	ISPRO	M	Nanopore	Healthy	0
+~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC08_ILL	BC08	Cancer	M	Illumina	Lung	0.105
+```
