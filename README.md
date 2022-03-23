@@ -1,6 +1,18 @@
 # Fragmentomics_GenomBiol
 Pipeline to replicate Katsman et. al fragmentomics results
 
+Requires:
+guppy
+minimap2
+bwa
+samtools
+bedtools
+R 
+
+Rpackages:
+
+
+
 ## Reads Preprocessing
 
 
@@ -39,6 +51,11 @@ Align with minimap2 and filter out unmapped reads, supplementary and secondary a
 minimap2 -ax map-ont --MD -L reference.mmi sample.fastq.gz | samtools view -h -q 20 -F 0x4 -F 0x100 -F 0x800 | ~/Fragmentomics/Scripts/General/samCigarToTlen.pl | awk '( $9 < 700 || $1 ~ /^@/ )' | samtools view -bS -  -o sample.filtered.bam
 ```
 
+
+Then store your filtered bams in a folder of your choice for the subsequent steps (in this tutorial ~/Fragmentomics/Data)
+Perform all the subsequent commands from that folder.
+The Genome_Biol_Data folder contains .stats files from Katsman et al. to replicate and test the pipeline (original .bam files are not provided here for ethical reasons, but you don't need them as you can perform the whole analysis directly from the files provided here)
+The Genome_Biol_Data_analyzed contains all the analysis from Katsman et al.
 
 ## Fragmentomics
 
@@ -102,10 +119,10 @@ bedtools getfasta  -s  -name -tab -fi reference.fa -bed  STATS/sample.stats | aw
 0000a096-3c26-46ad-bb20-4ad452db2ea0 NC_000001.11:239968433-239968602(-) CCTT 
 ```
 Obtain the counts of each 4-mer motif using the custom script provided and the .motif files previously produced.
-You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/ folder.
+You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/Utility folder.
 
 ```
-Rscript ~/Fragmentomics/Scripts/Motifs/count_motif.R ~/Fragmentomics/chr_list.txt  STATS STATS/MOTIF STATS/MOTIF/MOTIF_COUNTS/  sample  
+Rscript ~/Fragmentomics/Scripts/Motifs/count_motif.R ~/Fragmentomics/Utility/chr_list.txt  STATS STATS/MOTIF STATS/MOTIF/MOTIF_COUNTS/  sample  
 ```
 This will produce .motif.R files, which are R objects (tables) with the raw count of each 4-mer motif.
 
@@ -129,4 +146,16 @@ For both the scripts you have to provide a samples_info_heatmap.tsv file (the on
 ~/Fragmentomics/Data/STATS/MOTIF/MOTIF_COUNTS/	BC08_ILL	BC08	Cancer	M	Illumina	Lung	0.105
 ```
 
-### read length
+### Read length
+create folder for read length counts files
+```
+mkdir -p STATS/READLENGTH_COUNTS
+```
+#### Illumina
+
+Obtain the counts of each readlength bin (1bp)
+You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/ folder.
+
+```
+/usr/bin/Rscript ~/Fragmentomics/Scripts/Read_length/count_readlength_illumina.R ~/Fragmentomics/Utility/chr_list.txt STATS  STATS/READLENGTH_COUNTS sample
+```
