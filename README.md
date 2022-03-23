@@ -155,7 +155,7 @@ mkdir -p STATS/READLENGTH_COUNTS
 #### Illumina
 
 Obtain the counts of each readlength bin (1bp)
-You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/ folder.
+You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/Utility folder.
 
 ```
 /usr/bin/Rscript ~/Fragmentomics/Scripts/Read_length/count_readlength_illumina.R ~/Fragmentomics/Utility/chr_list.txt STATS  STATS/READLENGTH_COUNTS sample
@@ -163,7 +163,7 @@ You have to provide a list of the chromosome names you are including in the anal
 #### Nanopore 
 
 Obtain the counts of each readlength bin (1bp)
-You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/ folder.
+You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/Utility folder.
 You can provide a list of read ids which will be used for the analysis. For the paper, for multiplex runs, we used the ids of reads which had barcodes at both ends.
 ```
 /usr/bin/Rscript ~/Fragmentomics/Scripts/Read_length/count_readlength_nanopore_bothbarcodes.R ~/Fragmentomics/Utility/chr_list.txt  STATS STATS/READLENGTH_COUNTS  BC01.HAC ~/Fragmentomics/Data/BOTH_BARCODES/BC01.HAC.ids 
