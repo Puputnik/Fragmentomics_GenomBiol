@@ -19,8 +19,9 @@ Rpackages:
 
 ### Illumina
 
-trimma le N al 3’
-i file li trovi /home/guest/FASTQ_NO_Ns3P/47503_ID1514_2-19-744_S1_L001_R1_001.trimN3p.fastq.gz>
+Trim Ns at 3’ end
+TO BE COMPLETED
+/home/guest/FASTQ_NO_Ns3P/47503_ID1514_2-19-744_S1_L001_R1_001.trimN3p.fastq.gz>
 
 Align with bwa mem and filter out unmapped reads, supplementary and secondary alignments. Sort by coordinates
 
