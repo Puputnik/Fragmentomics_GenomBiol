@@ -6,6 +6,7 @@ guppy
 minimap2
 bwa
 samtools
+picard
 bedtools
 R 
 
@@ -158,4 +159,20 @@ You have to provide a list of the chromosome names you are including in the anal
 
 ```
 /usr/bin/Rscript ~/Fragmentomics/Scripts/Read_length/count_readlength_illumina.R ~/Fragmentomics/Utility/chr_list.txt STATS  STATS/READLENGTH_COUNTS sample
+```
+#### Nanopore 
+
+Obtain the counts of each readlength bin (1bp)
+You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/ folder.
+You can provide a list of read ids which will be used for the analysis. For the paper, for multiplex runs, we used the ids of reads which had barcodes at both ends.
+```
+/usr/bin/Rscript ~/Fragmentomics/Scripts/Read_length/count_readlength_nanopore_bothbarcodes.R ~/Fragmentomics/Utility/chr_list.txt  STATS STATS/READLENGTH_COUNTS  BC01.HAC ~/Fragmentomics/Data/BOTH_BARCODES/BC01.HAC.ids 
+```
+Use "NO" if you don't want to provide an .ids file (for example for singleplex runs)
+```
+/usr/bin/Rscript ~/Fragmentomics/Scripts/Read_length/count_readlength_nanopore_bothbarcodes.R ~/Fragmentomics/Utility/chr_list.txt  STATS STATS/READLENGTH_COUNTS  19_326.HAC  NO 
+```
+you can create a list of read ids from a fastq (for example obtained via demultiplexing with guppy using the "--both-barcodes" flag) in this way
+```
+gzip -dc sample.fastq.gz | grep -o  "@........-....-....-....-............"  | sed 's/@//' > sample.ids
 ```
