@@ -31,10 +31,10 @@ get_matrix <- function(samples_info, motifs){
   return(total)
 }
 #### load sample annotation file
-samples_info <- read.table("~/Fragmentomics/samples_info_heatmap.tsv", sep="\t", header=F, stringsAsFactors = F)
+samples_info <- read.table("~/Fragmentomics/Utility/samples_info_heatmap.tsv", sep="\t", header=F, stringsAsFactors = F)
 
 #### select motif order
-motifNames <- read.delim("~/Fragmentomics/endmotifs.txt", header = T, sep = "\t")
+motifNames <- read.delim("~/Fragmentomics/Utility/endmotifs.txt", header = T, sep = "\t")
 
 #### set output name
 outname <- "~/Fragmentomics/CCCA.pdf"
