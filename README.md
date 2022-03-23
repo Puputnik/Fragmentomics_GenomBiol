@@ -36,7 +36,7 @@ both barcodes version
 Align with minimap2 and filter out unmapped reads, supplementary and secondary alignments, and alignments with mapping quality < 20. Annotate TLEN field with read length obtained from CIGAR string (custom script provided) and filter out alignments with TLEN >= 700bp 
 
 ```
-minimap2 -ax map-ont --MD -L reference.mmi sample.fastq.gz | samtools view -h -q 20 -F 0x4 -F 0x100 -F 0x800 | ~/Fragmentomics/samCigarToTlen.pl | awk '( $9 < 700 || $1 ~ /^@/ )' | samtools view -bS -  -o sample.filtered.bam
+minimap2 -ax map-ont --MD -L reference.mmi sample.fastq.gz | samtools view -h -q 20 -F 0x4 -F 0x100 -F 0x800 | ~/Fragmentomics/Scripts/General/samCigarToTlen.pl | awk '( $9 < 700 || $1 ~ /^@/ )' | samtools view -bS -  -o sample.filtered.bam
 ```
 
 
@@ -52,7 +52,7 @@ mkdir -p STATS/MOTIF/MOTIF_COUNTS
 Create .stats files (custom format)
 
 ```
-samtools view  sample.bam | perl ~/Fragmentomics/stats_maker_0basedstart.pl > STATS/sample.stats
+samtools view  sample.bam | perl ~/Fragmentomics/Scripts/General/stats_maker_0basedstart.pl > STATS/sample.stats
 ```
 .stats files are 15 column, tab separated files which are used for both 4-mer and read-length analysis. 
 In order, the columns are:
@@ -105,14 +105,14 @@ Obtain the counts of each 4-mer motif using the custom script provided and the .
 You have to provide a list of the chromosome names you are including in the analysis in a chr_list.txt file (one chromosome per row). The file used for Katsman et. al is provided in the ~/Fragmentomics/ folder.
 
 ```
-Rscript ~/Fragmentomics/count_motif.R ~/Fragmentomics/chr_list.txt  STATS STATS/MOTIF STATS/MOTIF/MOTIF_COUNTS/  sample  
+Rscript ~/Fragmentomics/Scripts/Motifs/count_motif.R ~/Fragmentomics/chr_list.txt  STATS STATS/MOTIF STATS/MOTIF/MOTIF_COUNTS/  sample  
 ```
 This will produce .motif.R files, which are R objects (tables) with the raw count of each 4-mer motif.
 
-Use motif_heatmap.R file to make the heatmap from Figure 2
-Use plot_motif_CCCA.R file to make the CCCA jitterplot from Figure 2
+Use ~/Fragmentomics/Scripts/Motifs/motif_heatmap.R file to make the heatmap from Figure 2
+Use ~/Fragmentomics/Scripts/Motifs/plot_motif_CCCA.R file to make the CCCA jitterplot from Figure 2
 
-For both the scripts you have to provide a samples_info_heatmap.tsv file (the one used for Katsman et al. is included in the ~/Fragmentomics/ folder) with the following columns:
+For both the scripts you have to provide a samples_info_heatmap.tsv file (the one used for Katsman et al. is included in the ~/Fragmentomics/Utility folder) with the following columns:
 
 1) MOTIF_COUNTS folder full path
 2) sample basename (file name without the extension)
@@ -124,9 +124,9 @@ For both the scripts you have to provide a samples_info_heatmap.tsv file (the on
 8) Tumor Fraction 
 
 ```
-~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC01.HAC	BC01	Cancer	M	Nanopore	Lung	0.252
-~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC04.HAC	BC04	ISPRO	M	Nanopore	Healthy	0
-~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC08_ILL	BC08	Cancer	M	Illumina	Lung	0.105
+~/Fragmentomics/Data/STATS/MOTIF/MOTIF_COUNTS/	BC01.HAC	BC01	Cancer	M	Nanopore	Lung	0.252
+~/Fragmentomics/Data/STATS/MOTIF/MOTIF_COUNTS/	BC04.HAC	BC04	ISPRO	M	Nanopore	Healthy	0
+~/Fragmentomics/Data/STATS/MOTIF/MOTIF_COUNTS/	BC08_ILL	BC08	Cancer	M	Illumina	Lung	0.105
 ```
 
 ### read length
