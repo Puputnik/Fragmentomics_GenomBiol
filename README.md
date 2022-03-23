@@ -109,8 +109,10 @@ Rscript ~/Fragmentomics/count_motif.R ~/Fragmentomics/chr_list.txt  STATS STATS/
 ```
 This will produce .motif.R files, which are R objects (tables) with the raw count of each 4-mer motif.
 
-Use motif_heatmap_HAC.R file to make the heatmap from Figure 2
-You have to provide a samples_info_heatmap.tsv file (the one used for Katsman et al. is included in the ~/Fragmentomics/ folder) with the following columns:
+Use motif_heatmap.R file to make the heatmap from Figure 2
+Use plot_motif_CCCA.R file to make the CCCA jitterplot from Figure 2
+
+For both the scripts you have to provide a samples_info_heatmap.tsv file (the one used for Katsman et al. is included in the ~/Fragmentomics/ folder) with the following columns:
 
 1) MOTIF_COUNTS folder full path
 2) sample basename (file name without the extension)
@@ -126,3 +128,5 @@ You have to provide a samples_info_heatmap.tsv file (the one used for Katsman et
 ~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC04.HAC	BC04	ISPRO	M	Nanopore	Healthy	0
 ~/Fragmentomics/STATS/MOTIF/MOTIF_COUNTS/	BC08_ILL	BC08	Cancer	M	Illumina	Lung	0.105
 ```
+
+### read length
