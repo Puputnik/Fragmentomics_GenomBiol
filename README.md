@@ -176,3 +176,23 @@ you can create a list of read ids from a fastq (for example obtained via demulti
 ```
 gzip -dc sample.fastq.gz | grep -o  "@........-....-....-....-............"  | sed 's/@//' > sample.ids
 ```
+
+Use ~/Fragmentomics/Scripts/Read_length/readlengh_plots.R file to make the read length jitterplots and density plots from figure 2.
+
+You have to provide a samples_info_readlength.tsv file (the one used for Katsman et al. is included in the ~/Fragmentomics/Utility folder) with the following columns:
+
+1) READLENGTH_COUNTS folder full path
+2) sample basename (file name without the extension)
+3) sample printed name
+4) Disease annotation: Cancer, Healthy (Can be specified if HU or ISPRO samples)
+5) Sample sex (not mandatory)
+6) Library type (Illumina, Nanopore, Nanopore_HU)
+7) Sample type (Healthy, Lung)
+8) Tumor Fraction 
+
+```
+~/Fragmentomics/STATS/READLENGTH_COUNTS/	BC01.HAC	BC01	Cancer	M	Nanopore	Lung	0.252
+~/Fragmentomics/STATS/READLENGTH_COUNTS/	BC04.HAC	BC04	ISPRO	M	Nanopore	Healthy	0
+~/Fragmentomics/STATS/READLENGTH_COUNTS/	BC08_ILL	BC08	Cancer	M	Illumina	Lung	0.105
+```
+
