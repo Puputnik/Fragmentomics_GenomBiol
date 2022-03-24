@@ -13,6 +13,9 @@ perl
 
 Rpackages: "vroom", "data.table", "ggplot2", "ComplexHeatmap", "circlize", "pals", "ggplot2", "ggbeeswarm", "ggpubr"
 
+You can download raw and analysed data from from Katsman et al. XXXX
+Place them in ~/Fragmentomics/Data folder and follow the tutorials from the "Fragmentomics" section (skip the preprocessing)
+
 ## Reads Preprocessing
 
 ### Illumina
@@ -66,8 +69,7 @@ minimap2 -ax map-ont --MD -L reference.mmi sample.fastq.gz | samtools view -h -q
 
 Then store your filtered bams in a folder of your choice for the subsequent steps (in this tutorial ~/Fragmentomics/Data)
 Perform all the subsequent commands from that folder.
-The Genome_Biol_Data folder contains .stats files from Katsman et al. to replicate and test the pipeline (original .bam files are not provided here for ethical reasons, but you don't need them as you can perform the whole analysis directly from the files provided here)
-The Genome_Biol_Data_analyzed contains all the analysis from Katsman et al.
+The Genome_Biol_Data_analyzed contains the final analyzed files from Katsman et al. for plotting
 
 ## Fragmentomics
 
