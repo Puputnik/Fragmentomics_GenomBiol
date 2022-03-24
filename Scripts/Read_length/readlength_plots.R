@@ -29,7 +29,7 @@ get_matrix <- function(samples_info){
   return(total)
 }
 #### load sample annotation file
-samples_infob <- read.table("~/Fragmentomics/Utility/samples_info_length_HAC.tsv", sep="\t", header=F, stringsAsFactors = F)
+samples_infob <- read.table("~/Fragmentomics/Utility/samples_info_readlength.tsv", sep="\t", header=F, stringsAsFactors = F)
 samples_info <- samples_infob
 
 #### create matrix from samples
