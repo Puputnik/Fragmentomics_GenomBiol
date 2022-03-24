@@ -63,7 +63,7 @@ The Genome_Biol_Data_analyzed contains all the analysis from Katsman et al.
 
 ### 5' 4-mer motifs
 
-Enter the folder in which the filtered bams are stored (from now on "sample.bam") and create the folders for the subsequent analysis
+Enter the folder in which the filtered bams (from now on "sample.bam") are stored (~/Fragmentomics/Data/) and create the folders for the subsequent analysis
 
 ```
 mkdir -p STATS/MOTIF/MOTIF_COUNTS
