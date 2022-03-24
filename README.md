@@ -9,10 +9,9 @@ samtools
 picard
 bedtools
 R 
+perl
 
-Rpackages:
-
-
+Rpackages: "vroom", "data.table", "ggplot2", "ComplexHeatmap", "circlize", "pals", "ggplot2", "ggbeeswarm", "ggpubr"
 
 ## Reads Preprocessing
 
