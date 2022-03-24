@@ -15,13 +15,14 @@ Rpackages: "vroom", "data.table", "ggplot2", "ComplexHeatmap", "circlize", "pals
 
 ## Reads Preprocessing
 
-
 ### Illumina
 
-Trim Ns at 3’ end
-TO BE COMPLETED
-/home/guest/FASTQ_NO_Ns3P/47503_ID1514_2-19-744_S1_L001_R1_001.trimN3p.fastq.gz>
+It's possible that you need to trim Ns at 3’ end of illumina reads.
+You can do it as you prefere; alternatively, a custom script is provided:
 
+```
+perl ~/Fragmentomics/Scripts/General/trim_Ns.pl sample.fastq.gz output_folder 
+```
 Align with bwa mem and filter out unmapped reads, supplementary and secondary alignments. Sort by coordinates
 
 ```
@@ -40,11 +41,21 @@ samtools view -F 0x400 -q 20 -f 0x2 -h sample.marked_duplicates.srt.bam | awk '(
 
 ### Nanopore
 
-Basecall HAC
+If analysing a multiplex run, demultiplex your basecalled fastq files using guppy_barcoder (according to the developer instructions)
 
-guppy demultiplex trim barcodes
-both barcodes version
-		keep the ids.
+example:
+```
+guppy_barcoder -i fastq_pass/ -s demultiplexed_fastq/  --trim_barcodes --barcode_kits EXP-NBD104 --compress_fastq 
+```
+
+If you want to keep only reads with barcodes at both ends use the --require_barcodes_both_ends flag
+```
+guppy_barcoder -i fastq_pass/ -s demultiplexed_fastq_bothbarcodes/ --require_barcodes_both_ends --trim_barcodes --barcode_kits EXP-NBD104 --compress_fastq 
+```
+keep the ids of these reads as they will be useful later (see "Fragment Length" section)
+```
+gzip -dc sample.fastq.gz | grep -o  "@........-....-....-....-............"  | sed 's/@//' > ~/Fragmentomics/Data/BOTH_BARCODES/sample.ids
+```
 
 Align with minimap2 and filter out unmapped reads, supplementary and secondary alignments, and alignments with mapping quality < 20. Annotate TLEN field with read length obtained from CIGAR string (custom script provided) and filter out alignments with TLEN >= 700bp 
 
