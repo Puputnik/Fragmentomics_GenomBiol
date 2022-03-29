@@ -31,7 +31,7 @@ get_matrix <- function(samples_info, motifs){
   return(total)
 }
 #### load sample annotation file
-samples_info <- read.table("~/Fragmentomics/Utility/samples_info_heatmap.tsv", sep="\t", header=F, stringsAsFactors = F)
+samples_info <- read.table("~/Fragmentomics/samples_info_heatmap.tsv", sep="\t", header=F, stringsAsFactors = F)
 
 #### select motif order
 motifNames <- read.delim("~/Fragmentomics/Utility/endmotifs.txt", header = T, sep = "\t")
@@ -45,6 +45,7 @@ df <- get_matrix(samples_info, motifNames)
 #### annotate disease field with TF and library info
 df$disease[which(df$tumorFrac >= 0.15 & df$disease == "Cancer")] <- "TF>0.15"
 df$disease[which(df$tumorFrac < 0.15 & df$disease == "Cancer")] <- "TF<0.15"
+#df$disease[which(df$type == "Healthy")] <- "Healthy"
 df$disease[which(df$library == "Illumina")] <- "Illumina"
 df$disease[which(df$basename == "19-326")] <- "19-326"
 
