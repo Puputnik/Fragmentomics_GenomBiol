@@ -13,8 +13,7 @@ perl
 
 Rpackages: "vroom", "data.table", "ggplot2", "ComplexHeatmap", "circlize", "pals", "ggplot2", "ggbeeswarm", "ggpubr"
 
-You can download raw and analysed data from from Katsman et al. XXXX
-Place them in ~/Fragmentomics/Data folder and follow the tutorials from the "Fragmentomics" section (skip the preprocessing)
+To download raw data refere to Katsman et al. publication
 
 ## Reads Preprocessing
 
