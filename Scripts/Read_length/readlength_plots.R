@@ -132,6 +132,13 @@ min_long = 100
 max_long = 220
 
 samples_info_plot <- get_lengths(samples_info, min_short,max_short,min_long,max_long)
+#### save mean and sd summary
+can <- samples_info_plot$ratio[which(samples_info_plot$disease == "TF>0.15")]
+hea <- samples_info_plot$ratio[which(samples_info_plot$disease %in% c("ISPRO", "HU"))]
+summary <- rbind(c("Cancers",mean(can, na.rm = T),sd(can, na.rm = T)), c("Healthy",mean(hea, na.rm = T), sd(hea, na.rm = T)))
+colnames(summary) <- c("group", "mean", "standard_deviation")
+write.table(summary, file="~/Fragmentomics/summary_mononucleosomes.tsv",quote = F, row.names = F, sep="\t")
+#### plot
 plotting(samples_info_plot, 0.3, "~/Fragmentomics/readlength_jitterplot.pdf")
 
 #### keep data for correlation plot
@@ -149,6 +156,13 @@ max_long = 400
 
 samples_info_plot <- get_lengths(samples_info, min_short,max_short,min_long,max_long)
 #samples_info_plot <- droplevels(samples_info_plot[-which(samples_info_plot$disease == "Illumina"),])
+#### save mean and sd summary
+can <- samples_info_plot$ratio[which(samples_info_plot$disease == "TF>0.15")]
+hea <- samples_info_plot$ratio[which(samples_info_plot$disease %in% c("ISPRO", "HU"))]
+summary <- rbind(c("Cancers",mean(can, na.rm = T),sd(can, na.rm = T)), c("Healthy",mean(hea, na.rm = T), sd(hea, na.rm = T)))
+colnames(summary) <- c("group", "mean", "standard_deviation")
+write.table(summary, file="~/Fragmentomics/summary_dinucleosomes.tsv",quote = F, row.names = F, sep="\t")
+#### plot
 plotting(samples_info_plot, 0.7, "~/Fragmentomics/readlength_jitterplot_long.pdf")
 
 #### keep data for correlation plot
