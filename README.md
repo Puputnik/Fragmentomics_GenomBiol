@@ -62,7 +62,7 @@ gzip -dc sample.fastq.gz | grep -o  "@........-....-....-....-............"  | s
 Align with minimap2 and filter out unmapped reads, supplementary and secondary alignments, and alignments with mapping quality < 20. Annotate TLEN field with read length obtained from CIGAR string (custom script provided) and filter out alignments with TLEN >= 700bp 
 
 ```
-minimap2 -ax map-ont --MD -L reference.mmi sample.fastq.gz | samtools view -h -q 20 -F 0x4 -F 0x100 -F 0x800 | ~/Fragmentomics/Scripts/General/samCigarToTlen.pl | awk '( $9 < 700 || $1 ~ /^@/ )' | samtools view -bS -  -o sample.filtered.bam
+minimap2 -ax map-ont --MD -L reference.mmi sample.fastq.gz | samtools view -h -q 20 -F 0x4 -F 0x100 -F 0x800 | perl ~/Fragmentomics/Scripts/General/samCigarToTlen.pl | awk '( $9 < 700 || $1 ~ /^@/ )' | samtools view -bS -  -o sample.filtered.bam
 ```
 
 
