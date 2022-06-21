@@ -35,10 +35,10 @@ Mark duplicates using picard
 ```
 java -jar /bin/picard.jar MarkDuplicates I=sample.srt.bam  O=sample.marked_duplicates.srt.bam M=sample.metrics 
 ```
-Filter out duplicates, reads not in proper pair and alignments with mapping quality < 20. Filter out aligments with TLEN >= 700bp
+Filter out duplicates and alignments with mapping quality < 20. Filter out aligments with TLEN >= 700bp
 
 ```
-samtools view -F 0x400 -q 20 -f 0x2 -h sample.marked_duplicates.srt.bam | awk '( $9 < 700 || $1 ~ /^@/ )' | samtools view -bS -  -o sample.filtered.bam
+samtools view -F 0x400 -q 20 -h sample.marked_duplicates.srt.bam | awk '( $9 < 700 || $1 ~ /^@/ )' | samtools view -bS -  -o sample.filtered.bam
 ```
 
 ### Nanopore
