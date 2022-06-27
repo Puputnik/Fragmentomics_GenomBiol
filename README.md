@@ -15,6 +15,11 @@ Rpackages: "vroom", "data.table", "ggplot2", "ComplexHeatmap", "circlize", "pals
 
 To download raw data refere to Katsman et al. publication
 
+Before starting this tutorial, rename the folder containing this README file as "Fragmentomics" and put it in your home.
+```
+mv Fragmentomics_Genome_Biol ~/Fragmentomics/
+```
+
 ## Reads Preprocessing
 
 ### Illumina
