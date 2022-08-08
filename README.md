@@ -61,7 +61,7 @@ guppy_barcoder -i fastq_pass/ -s demultiplexed_fastq_bothbarcodes/ --require_bar
 ```
 keep the ids of these reads as they will be useful later (see "Fragment Length" section)
 ```
-gzip -dc sample.fastq.gz | grep -o  "@........-....-....-....-............"  | sed 's/@//' > ~/Fragmentomics/Data/BOTH_BARCODES/sample.ids
+gzip -dc sample.fastq.gz | grep -Eo  "^@........-....-....-....-............"  | sed 's/@//' > ~/Fragmentomics/Data/BOTH_BARCODES/sample.ids
 ```
 
 Align with minimap2 and filter out unmapped reads, supplementary and secondary alignments, and alignments with mapping quality < 20. Annotate TLEN field with read length obtained from CIGAR string (custom script provided) and filter out alignments with TLEN >= 700bp 
